@@ -1,11 +1,8 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
 # Now you can access your environment variables
-HF_TOKEN = os.environ.get("HF_TOKEN")
+HF_TOKEN = "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"
 from langchain_huggingface import HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
