@@ -24,7 +24,7 @@ from langchain_community.vectorstores import FAISS
 HUGGINGFACE_REPO_ID="mistralai/Mistral-7B-Instruct-v0.3"
 
 def load_llm(huggingface_repo_id):
-    groq_llm=ChatGroq(model="mixtral-8x7b-32768",api_key="api_key")
+    groq_llm=ChatGroq(model="mixtral-8x7b-32768",api_key="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")
     return groq_llm
 
 # Step 2: Connect LLM with FAISS and Create chain
