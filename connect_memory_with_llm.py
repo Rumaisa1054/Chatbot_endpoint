@@ -1,8 +1,13 @@
+# FLASK API CREATED: http://13.60.25.63:8000/search?prompt=what%20is%20gerd
 import os
 from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Now you can access your environment variables
-HF_TOKEN = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 from langchain_huggingface import HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
@@ -19,13 +24,8 @@ from langchain_community.vectorstores import FAISS
 HUGGINGFACE_REPO_ID="mistralai/Mistral-7B-Instruct-v0.3"
 
 def load_llm(huggingface_repo_id):
-    llm=HuggingFaceEndpoint(
-        repo_id=huggingface_repo_id,
-        temperature=0.5,
-        model_kwargs={"token":HF_TOKEN,
-                      "max_length":"512"}
-    )
-    return llm
+    groq_llm=ChatGroq(model="mixtral-8x7b-32768",api_key="api_key")
+    return groq_llm
 
 # Step 2: Connect LLM with FAISS and Create chain
 
@@ -63,3 +63,8 @@ def response(prompt):
     response = qa_chain.invoke({'query': user_query})
     return ("RESULT: ", response["result"])
     #print("SOURCE DOCUMENTS: ", response["source_documents"])
+
+ch = 'y'
+while(ch != 'n'):
+    print(response(input("Query : ")))
+    ch = input("continue")
